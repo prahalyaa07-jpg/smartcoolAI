@@ -68,7 +68,7 @@ fig = px.bar(
     title="AI Predicted Heat Risk by Area"
 )
 
-st.plotly_chart(fig, width=True)
+st.plotly_chart(fig, width="stretch")
 
 
 st.write(f"### 📍 Analysis for {city}")
@@ -284,7 +284,7 @@ st.table(
         [
             "Area",
             "City",
-            "AI Priority Score"
+            "Priority Score"
         ]
     ]
 )
@@ -293,7 +293,7 @@ st.subheader("📊 Top 5 Heat Risk Areas in India")
 fig = px.bar(
     top5,
     x="Area",
-    y="AI Priority Score",
+    y="Priority Score",
     color="City",
     title="Highest Heat Risk Areas Across Cities"
 )
