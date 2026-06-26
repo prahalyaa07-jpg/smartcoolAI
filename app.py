@@ -68,7 +68,7 @@ fig = px.bar(
     title="AI Predicted Heat Risk by Area"
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width=True)
 
 
 st.write(f"### 📍 Analysis for {city}")
@@ -176,6 +176,31 @@ comparison_data = {
 }
 
 st.table(comparison_data)
+st.subheader("🛰️ Satellite Urban Heat Insights")
+
+st.info("""
+Satellite Data Indicators Used:
+
+• Land Surface Temperature (LST)
+
+• NDVI (Vegetation Index)
+
+• Urban Heat Island Monitoring
+
+• AI-Based Heat Risk Prediction
+""")
+
+st.subheader("🌿 NDVI Vegetation Analysis")
+
+fig_ndvi = px.bar(
+    df,
+    x="Area",
+    y="Vegetation",
+    color="Vegetation",
+    title="Vegetation (NDVI) by Area"
+)
+
+st.plotly_chart(fig_ndvi, width="stretch")
 st.subheader(f"🗺️ {city} Heat Hotspots")
 st.markdown("""
 ### Risk Legend
@@ -259,7 +284,7 @@ st.table(
         [
             "Area",
             "City",
-            "Priority Score"
+            "AI Priority Score"
         ]
     ]
 )
@@ -268,7 +293,7 @@ st.subheader("📊 Top 5 Heat Risk Areas in India")
 fig = px.bar(
     top5,
     x="Area",
-    y="Priority Score",
+    y="AI Priority Score",
     color="City",
     title="Highest Heat Risk Areas Across Cities"
 )
@@ -310,7 +335,7 @@ st.download_button(
     data=csv,
     file_name=f"{city}_heat_report.csv",
     mime="text/csv"
-)
+) 
 st.table(
     ranking_df[
         [
@@ -319,3 +344,19 @@ st.table(
         ]
     ]
 )
+
+st.subheader("📑 Executive Summary")
+
+st.success(f"""
+City Analyzed: {city}
+
+Average Temperature: {avg_temp}°C
+
+Heat Hotspots: {hotspots}
+
+Recommended Action: {action}
+
+Expected Temperature Reduction: {reduction}
+
+Priority Level: {priority}
+""")
