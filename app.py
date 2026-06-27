@@ -213,13 +213,30 @@ st.markdown("""
 """)
 
 # Create map centered on Chennai
+# Create India Map
 m = folium.Map(
-    location=[
-        df["Latitude"].mean(),
-        df["Longitude"].mean()
-    ],
-    zoom_start=11
+    location=[22.5937, 78.9629],   # Center of India
+    zoom_start=5,
+    tiles=None
 )
+
+# OpenStreetMap layer
+folium.TileLayer(
+    "OpenStreetMap",
+    name="Street Map"
+).add_to(m)
+
+# Satellite Layer
+folium.TileLayer(
+    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    attr="Esri",
+    name="Satellite",
+    overlay=False,
+    control=True
+).add_to(m)
+
+# Layer control
+folium.LayerControl().add_to(m)
 # Example hotspot markers
 # High Risk Hotspot
 for index, row in df.iterrows():
